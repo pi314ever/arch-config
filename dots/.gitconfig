@@ -1,0 +1,15 @@
+[user]
+	email = pilotflyer824@gmail.com
+	name = pi314ever
+[init]
+	defaultBranch = main
+[push]
+	autoSetupRemote = true
+[protocol "file"]
+	allow = always
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
+[core]
+	excludesFile = /home/daniel/.gitignore_global
+[safe]
+	directory = /opt/flutter

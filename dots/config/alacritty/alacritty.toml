@@ -1,0 +1,14 @@
+[env]
+TERM = "alacritty"
+
+# [font]
+# size = 8
+
+[font.normal]
+family = "MesloLGS NF"
+
+[shell]
+program = "/usr/bin/zsh"
+
+[selection]
+save_to_clipboard = true
