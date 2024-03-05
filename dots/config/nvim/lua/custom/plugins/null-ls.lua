@@ -10,7 +10,7 @@ return {
         -- null_ls.builtins.formatting.isort,
         -- null_ls.builtins.formatting.clang_format,
         -- null_ls.builtins.formatting.prettier,
-        null_ls.builtins.formatting.latexindent,
+        -- null_ls.builtins.formatting.latexindent,
       },
     })
     vim.keymap.set("n", "<leader>fm", vim.lsp.buf.format, { desc = "[F]or[m]at document" })

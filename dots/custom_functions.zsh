@@ -1,9 +1,9 @@
+#!/usr/bin/bash
 # Overwrite ls with eza
 unalias ls 2>/dev/null
 ls() {
     if command -v eza &>/dev/null; then
-        DEFAULT_EZA_ARGS="-F --icons --group-directories-first"
-        eza $DEFAULT_EZA_ARGS "$@"
+        eza -F --icons=auto --group-directories-first "$@"
     else
         echo "eza not found, using default ls"
         command ls "$@"
@@ -26,9 +26,14 @@ unalias cdh 2>/dev/null
 cdh() {
     if [[ -n $ZSH_INIT_CDH_ALIAS ]]; then
         cd "${ZSH_INIT_CDH_ALIAS//[\'\"]*/}"
-    elif [ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" = "true"]; then
+    elif [ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" = "true" ]; then
         cd "$(git rev-parse --show-toplevel)"
     else
         cd
     fi
+}
+
+unalias cdls 2>/dev/null
+cdls() {
+	cd "$@" && ls
 }
