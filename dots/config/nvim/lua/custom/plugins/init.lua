@@ -4,8 +4,7 @@
 -- See the kickstart.nvim README for more information
 -- Custom tabstop and shiftwidth
 vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.expandtab = false
+vim.opt.shiftwidth = 2 vim.opt.expandtab = false
 return {
   -- Custom keybinds
   vim.keymap.set("n", ",", "<cmd>noh<CR>"),
