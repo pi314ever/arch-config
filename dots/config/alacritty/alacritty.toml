@@ -9,6 +9,3 @@ family = "MesloLGS NF"
 
 [shell]
 program = "/usr/bin/zsh"
-
-[selection]
-save_to_clipboard = true

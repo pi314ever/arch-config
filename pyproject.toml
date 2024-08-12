@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "arch-config"
+version = "0.1.0"
+description = ""
+authors = ["pi314ever <pilotflyer824@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+loguru = "^0.7.2"
+pydantic = "^2.8.2"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.4.2"
+pytest = "^8.2.2"
+
+[tool.poetry.scripts]
+"arch-config" = "arch_config.main:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -6,8 +6,7 @@ return {
 		require("mason").setup()
 		require("mason-null-ls").setup({
 			ensure_installed = {
-				"black",
-				"isort",
+				"ruff",
 				"prettier",
 				"clang-format",
 				"marksman",

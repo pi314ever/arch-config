@@ -1,9 +1,8 @@
 return {
-  "folke/tokyonight.nvim",
+  'navarasu/onedark.nvim',
   lazy = false,
   priority = 1000,
-  opts = {},
-  config = function ()
-  vim.cmd.colorscheme "tokyonight-moon"
+  config = function()
+    vim.cmd.colorscheme 'onedark'
   end,
 }
