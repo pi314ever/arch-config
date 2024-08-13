@@ -2,6 +2,7 @@ import re
 import subprocess
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Optional
 
 from loguru import logger
 
@@ -10,17 +11,33 @@ from .task import Result
 
 @dataclass
 class CommandOutput:
+    command: list[str]
     returncode: int
     stdout: str = ""
     stderr: str = ""
 
-    def to_result(self) -> "Result":
-        success = self.returncode == 0
-        return Result(success, "" if success else self.stderr)
+    def to_result(self, message: Optional[str] = None) -> "Result":
+        return Result(
+            self.success,
+            ""
+            if self.success
+            else f"{message or 'Command failed'}: {self.command} with error: {self.stderr}",
+        )
 
     @property
     def success(self) -> bool:
         return self.returncode == 0
+
+    @property
+    def error(self) -> bool:
+        return self.returncode != 0
+
+    def expect_success(self, message: Optional[str] = None) -> "CommandOutput":
+        if self.error:
+            raise RuntimeError(
+                f"{message or 'Command failed'}: {self.command} with error: {self.stderr}"
+            )
+        return self
 
 
 DRY_RUN = False
@@ -37,10 +54,11 @@ def run_command(
     )
     if dry_run:
         logger.info("Dry run, not executing command.")
-        return CommandOutput(0, "", "")
+        return CommandOutput(command, 0, "", "")
     else:
         result = subprocess.run(command, *args, capture_output=True, **kwargs)
         return CommandOutput(
+            command,
             result.returncode,
             result.stdout.decode(),
             result.stderr.decode(),

@@ -21,7 +21,7 @@ class Task(ABC):
     name: str
     description: str
     required_args: list["ArgsEnum"] = []
-    dependencies: list[TaskType] = []
+    dependencies: list[str] = []  # List of task names to install
 
     @abstractmethod
     def run(self, args: "Args") -> Result:

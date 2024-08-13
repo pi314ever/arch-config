@@ -14,7 +14,7 @@ class ArgsEnum(Enum):
     DOTS_DIR = (
         ["--dots_dir"],
         {
-            "help": "The directory where the dotfiles are stored",
+            "help": "The directory where the dotfiles are stored. See README for more info on dots directory structure.",
             "type": Path,
         },
     )
