@@ -19,6 +19,10 @@ class CommandOutput:
         success = self.returncode == 0
         return Result(success, "" if success else self.stderr)
 
+    @property
+    def success(self) -> bool:
+        return self.returncode == 0
+
 
 DRY_RUN = False
 
@@ -88,9 +92,11 @@ def pacman_is_installed(package: str) -> bool:
         return True
     return False
 
+
 def aur_install(package_names: list[str], helper: str = "paru") -> CommandOutput:
     """Installs an AUR package."""
     return run_command([helper, "-S", "--noconfirm"] + package_names)
+
 
 def aur_is_installed(package: str, helper: str = "paru") -> bool:
     """Checks if an AUR package is installed."""
