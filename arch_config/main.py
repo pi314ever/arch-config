@@ -1,6 +1,6 @@
-from arch_installer.parser import get_parser
-from arch_installer.args import Args, ArgsEnum
-from arch_installer.utils.task import TASKS
+from arch_config.parser import get_parser
+from arch_config.args import Args, ArgsEnum
+from arch_config.utils.task import TASKS
 
 
 def main():
