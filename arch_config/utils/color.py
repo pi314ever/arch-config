@@ -1,6 +1,5 @@
 "Colors for shell output."
 
-
 # ANSI escape codes for colors
 # https://stackoverflow.com/questions/287871/how-do-i-print-colored-text-to-the-terminal
 HEADER = "\033[95m"

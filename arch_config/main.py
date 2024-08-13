@@ -1,5 +1,5 @@
 from arch_config.parser import get_parser
-from arch_config.args import Args, ArgsEnum
+from arch_config.args import Args
 from arch_config.utils.task import TASKS
 
 
