@@ -142,11 +142,15 @@ require('lazy').setup({
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
+    -- requires = { 'nvim-tree/nvim-web-devicons', opt = true },
     opts = {
       options = {
         icons_enabled = false,
         component_separators = '|',
         section_separators = '',
+      },
+      sections = {
+        lualine_c = { { 'filename', path = 3 } },
       },
     },
   },
@@ -225,8 +229,8 @@ vim.o.smartindent = true
 vim.wo.signcolumn = 'yes'
 
 -- Decrease update time
-vim.o.updatetime = 100
-vim.o.timeoutlen = 300
+vim.o.updatetime = 4000
+vim.o.timeoutlen = 100
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
@@ -564,7 +568,7 @@ cmp.setup {
     ['<C-Space>'] = cmp.mapping.complete {},
     ['<CR>'] = cmp.config.disable,
     ['<C-y>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
+      behavior = cmp.ConfirmBehavior.Insert,
       select = false,
     },
     ['<Tab>'] = cmp.mapping(function(fallback)
