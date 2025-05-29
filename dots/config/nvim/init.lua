@@ -174,6 +174,7 @@ require('lazy').setup({
     branch = '0.1.x',
     dependencies = {
       'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope-ui-select.nvim',
       -- Fuzzy Finder Algorithm which requires local dependencies to be built.
       -- Only load if `make` is available. Make sure you have the system
       -- requirements installed.
@@ -188,7 +189,13 @@ require('lazy').setup({
       },
     },
     config = function(self, opts)
+	    require('telescope').setup({
+      ['ui-select'] = { 
+	      require('telescope.themes').get_dropdown {} },
+    }
+    )
       require('telescope.builtin').lsp_references()
+      require('telescope').load_extension 'ui-select'
     end,
   },
 

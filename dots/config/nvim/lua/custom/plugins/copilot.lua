@@ -7,7 +7,7 @@ return {
     },
     event = 'InsertEnter',
     opts = {
-      copilot_model = 'gpt-4o-copilot',
+      copilot_model = 'claude-3.7-sonnet',
       suggestion = {
         keymap = {
           accept = '<C-j>',
@@ -20,7 +20,7 @@ return {
         function()
           require('copilot.suggestion').toggle_auto_trigger()
         end,
-        desc = '[C]o[p]ilot - Toggle Auto Trigger',
+        desc = '[C]o[P]ilot - Toggle Auto Trigger',
       },
     },
   },
@@ -57,9 +57,10 @@ return {
         '<leader>Cp',
         function()
           local actions = require 'CopilotChat.actions'
+					require('CopilotChat').select_prompt()
           require('CopilotChat.integrations.telescope').pick(actions.prompt_actions())
         end,
-        desc = '[C]opilotChat - [P]rompt actions',
+        desc = '[C]opilotChat - [p]rompt actions',
         mode = { 'n', 'v' },
       },
     },
