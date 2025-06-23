@@ -25,19 +25,16 @@ require('lazy').setup({
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
 
+  -- Detect tabstop and shiftwidth automatically
+  'tpope/vim-sleuth',
+
   {
-    -- LSP Configuration & Plugins
-    'neovim/nvim-lspconfig',
-    dependencies = {
-      -- Automatically install LSPs to stdpath for neovim
-      { 'williamboman/mason.nvim', config = true },
-      'williamboman/mason-lspconfig.nvim',
-
-      -- Useful status updates for LSP
-      { 'j-hui/fidget.nvim', opts = {} },
-
-      -- Additional lua configuration, makes nvim stuff amazing!
-      'folke/neodev.nvim',
+    'folke/lazydev.nvim',
+    ft = 'lua', -- only load on lua files
+    opts = {
+      library = {
+        'lazy.nvim',
+      },
     },
   },
 
@@ -60,6 +57,12 @@ require('lazy').setup({
 
       -- Adds a number of user-friendly snippets
       'rafamadriz/friendly-snippets',
+    },
+
+    opts = {
+      sources = {
+        name = 'lazydev',
+      },
     },
   },
 
@@ -189,11 +192,11 @@ require('lazy').setup({
       },
     },
     config = function(self, opts)
-	    require('telescope').setup({
-      ['ui-select'] = { 
-	      require('telescope.themes').get_dropdown {} },
-    }
-    )
+      require('telescope').setup {
+        ['ui-select'] = {
+          require('telescope.themes').get_dropdown {},
+        },
+      }
       require('telescope.builtin').lsp_references()
       require('telescope').load_extension 'ui-select'
     end,
@@ -252,7 +255,6 @@ vim.o.timeoutlen = 100
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
--- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
 vim.opt.listchars = {
@@ -454,61 +456,6 @@ require('which-key').add {
   { '<leader>w', desc = '[W]orkspace', mode = 'n' },
   { '<leader>', desc = 'VISUAL <leader>', mode = 'v' },
   { '<leader>h', desc = 'Git [H]unk', mode = 'v' },
-}
-
--- mason-lspconfig requires that these setup functions are called in this order
--- before setting up the servers.
-require('mason').setup()
-require('mason-lspconfig').setup()
-
--- Enable the following language servers
---  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
---
---  Add any additional override configuration in the following tables. They will be passed to
---  the `settings` field of the server config. You must look up that documentation yourself.
---
---  If you want to override the default filetypes that your language server will attach to you can
---  define the property 'filetypes' to the map in question.
-local servers = {
-  pyright = {},
-  bashls = {},
-  marksman = {},
-  texlab = {},
-  ruff = {},
-
-  lua_ls = {
-    Lua = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
-      -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-      diagnostics = { disable = { 'missing-fields' } },
-    },
-  },
-}
-
--- Setup neovim lua configuration
-require('neodev').setup()
-
--- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-
--- Ensure the servers above are installed
-local mason_lspconfig = require 'mason-lspconfig'
-
-mason_lspconfig.setup {
-  ensure_installed = vim.tbl_keys(servers),
-}
-
-mason_lspconfig.setup_handlers {
-  function(server_name)
-    require('lspconfig')[server_name].setup {
-      capabilities = capabilities,
-      on_attach = require('helpers.lsp').on_attach,
-      settings = servers[server_name],
-      filetypes = (servers[server_name] or {}).filetypes,
-    }
-  end,
 }
 
 -- [[ Configure nvim-cmp ]]
