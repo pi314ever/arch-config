@@ -11,10 +11,8 @@ vim.g.rustaceanvim = {
             enable = true,
           },
         },
-        checkOnSave = {
-          command = 'clippy',
-          extraArgs = { '--', '-W', 'clippy::pedantic' },
-        },
+        checkOnSave = true,
+        check = { command = 'clippy' },
         procMacro = {
           enable = true,
         },
