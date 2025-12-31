@@ -174,7 +174,7 @@ require('lazy').setup({
   -- Fuzzy Finder (files, lsp, etc)
   {
     'nvim-telescope/telescope.nvim',
-    branch = '0.1.x',
+    version = "*",
     dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-telescope/telescope-ui-select.nvim',
@@ -197,8 +197,6 @@ require('lazy').setup({
           require('telescope.themes').get_dropdown {},
         },
       }
-      require('telescope.builtin').lsp_references()
-      require('telescope').load_extension 'ui-select'
     end,
   },
 
