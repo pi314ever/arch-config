@@ -81,7 +81,9 @@ This step-by-step guide follows the [Arch Linux installation guide](https://wiki
 
 ### Python Environment
 
-Currently, my preference for Python version and package management uses `pyenv` for version management, `venv` for optional local environments, and `poetry` for package management. The following steps outline the installation of these tools.
+Currently, my preference for Python version and package management uses `pyenv`
+for version management, `venv` for optional local environments, and `poetry` for
+package management. The following steps outline the installation of these tools.
 
 1. Install `pyenv` and `pyenv-virtualenv` from source.
 
