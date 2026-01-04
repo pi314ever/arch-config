@@ -9,7 +9,14 @@ return {
   config = function()
     ---@type opencode.Opts
     vim.g.opencode_opts = {
-      -- Your configuration, if any — see `lua/opencode/config.lua`, or "goto definition".
+      provider = {
+        enabled = 'snacks',
+        snacks = {
+          win = {
+            enter = true, -- Focus opencode terminal when opened.
+          },
+        },
+      },
     }
 
     -- Required for `opts.events.reload`.
@@ -22,9 +29,13 @@ return {
     vim.keymap.set({ 'n', 'x' }, '<leader>ox', function()
       require('opencode').select()
     end, { desc = 'Execute opencode action…' })
-    vim.keymap.set({ 'n', 't' }, '<leader>ot', function()
+    vim.keymap.set({ 'n' }, '<leader>ot', function()
       require('opencode').toggle()
-    end, { desc = 'Toggle opencode' })
+    end, { desc = 'Toggle opencode terminal' })
+
+    vim.keymap.set({ 'n', 't' }, '<M-C-o>', function()
+      require('opencode').toggle()
+    end, { desc = 'Toggle opencode terminal' })
 
     vim.keymap.set({ 'n', 'x' }, 'go', function()
       if vim.fn.mode() == 'n' then
